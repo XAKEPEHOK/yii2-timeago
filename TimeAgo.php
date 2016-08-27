@@ -49,7 +49,11 @@ class TimeAgo extends Widget
 
     public function init()
     {
-        if ($this->language === null) $this->language = substr(\Yii::$app->language,0,2);
+        if ($this->language === null) {
+            $lang = substr(\Yii::$app->language,0,2);
+            if ($lang == 'zn') $lang = \Yii::$app->language;
+            $this->language =  $lang;
+        }
         $this->options['data-toggle'] = ArrayHelper::getValue($this->options, 'data-toggle', 'timeago');
         $this->registerLocale();
         if($this->localTitle) {
